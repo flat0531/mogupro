@@ -28,11 +28,11 @@ namespace Game
 			// scale       大きさ
 			// color       カラー（ここは本来Texture）
 			// type        Gemの種類(これ入れたらtexture引数にいらないかも)
-			cGem(int id,ci::vec3 postion, ci::vec3 scale, ci::Color color, GemType type, float delay)
+			cGem(int id,ci::vec3 postion, ci::vec3 scale, ci::ColorA color, GemType type, float delay)
 				: mId(id),mPosition(postion), mScale(scale), mColor(color), mType(type), mDelay(delay) {};
 			~cGem() {};
 
-			void setUp(ci::vec3 postion, ci::vec3 scale, ci::Color color, GemType type, float delay);
+			void setUp(ci::vec3 postion, ci::vec3 scale, ci::ColorA color, GemType type, float delay);
 			void draw();
 			void drawFbo();
 			void update();
@@ -69,7 +69,7 @@ namespace Game
 			ci::vec3 mPutPosition;
 			ci::vec3 mScale;
 			ci::vec3 mRotation;
-			ci::Color mColor;
+			ci::ColorA mColor;
 			float mDelay;
 			GemType mType;
 			std::vector<uint32_t> indices;

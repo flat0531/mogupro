@@ -11,6 +11,7 @@ namespace Game
 		mGemMaxNum = gemMaxNum;
 		mBloom = 1.0f;
 		mSeed = seed;
+		mTime = 0.0F;
 		for (int i = 0; i < 2; i++)
 		{
 			mTeamGems[i].insert(std::map<Gem::GemType, int>::value_type(Gem::GemType::Dia, 0));
@@ -48,14 +49,17 @@ namespace Game
 			ci::gl::drawSolidRect(rect);
 	}
 
-	void cGemManager::update()
+	void cGemManager::update( float delta )
 	{
+		mTime += delta;
+
 		//sort();
 		ci::gl::ScopedFramebuffer fbScp(mGemBuffer);
 		ci::gl::ScopedViewport scpVp2(ci::ivec2(0), mGemBuffer->getSize());
 
 		ci::gl::setMatrices(CAMERA->getCamera());
 		ci::gl::ScopedGlslProg shaderScp(mVboShader);
+		mVboShader->uniform( "sysTime", mTime );
 		ci::gl::clear(ci::ColorA(0, 0, 0, 0));
 		
 		ci::gl::draw(mGemsVbo);
@@ -76,7 +80,7 @@ namespace Game
 
 
 			//テクスチャーの張替え
-			ci::Color color = ci::Color(1, 1, 1);
+			ci::ColorA color = ci::ColorA(1, 1, 1);
 			switch (type)
 			{
 			case Game::Gem::GemType::Dia:
@@ -94,6 +98,7 @@ namespace Game
 			default:
 				break;
 			}
+			color.a = cinder::randFloat( );
 			//oldcode-------
 			mGemsptr.push_back(std::make_shared<Gem::cGem>(i, (ci::vec3(x, y, z) * mMapChipSize) + mPosition, ci::vec3(mGemScale), color, type, delay));
 			mGemsptr.push_back(std::make_shared<Gem::cGem>(i + 1, mPosition + ci::vec3(mRandomRange.x - x + mRandomRange.x - 1, y, mRandomRange.z - z - 1) * mMapChipSize, ci::vec3(mGemScale), color, type, delay));

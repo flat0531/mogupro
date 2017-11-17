@@ -4,7 +4,7 @@ namespace Game
 {
 	namespace Gem
 	{
-		void cGem::setUp(ci::vec3 positin, ci::vec3 scale, ci::Color color, GemType type, float delay)
+		void cGem::setUp(ci::vec3 positin, ci::vec3 scale, ci::ColorA color, GemType type, float delay)
 		{
 			mPosition = positin;
 			mScale = scale;

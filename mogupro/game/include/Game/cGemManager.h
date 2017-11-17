@@ -37,7 +37,7 @@ namespace Game
 		void setUp(ci::vec3 position, ci::vec3 randomRange, float mapChipSize, float gemScale, int gemMaxNum, unsigned long seed);
 		void draw();
 		void drawFbo();
-		void update();
+		void update( float delta );
 
 		void create();
 		// team     0‚ªfirst,1‚ªsecond
@@ -76,5 +76,6 @@ namespace Game
 		float blurSize;
 		float mBloom;
 		unsigned long mSeed;
+		float mTime;
 	};
 }
